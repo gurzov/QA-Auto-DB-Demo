@@ -1,6 +1,8 @@
 # QA-Auto-DB-Demo
-DB Demo task for Lesson 10 of QA Automation
+DB Demo task for Lesson 10 of QA Automation courses.
+
 This is the framework to implement the soution of homework tasks:
+
 1 - тест который будет сравнивать цены на продукты в UI и базе данных. 
 Цены на продукты содержатся в таблице "lc_products_prices".
 Одна уточка у нас идет по акции и нам нужно брать ее обычную цену из UI (цена которая без скидки).
