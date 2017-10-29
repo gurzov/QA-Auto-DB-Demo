@@ -13,7 +13,6 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-
 public class LitecartDatabaseTests {
 
     private final String APPLINK = PropertyHelper.getProperty("addUserUrl");
@@ -67,7 +66,7 @@ public class LitecartDatabaseTests {
         assertEquals(duckPricesFromDB, duckPricesFromUI);
     }
    @Test
-    public void duckPricesInUIShouldBeEqualToDB2() throws SQLException {
+    public void duckPricesInUIShouldBeEqualToDB_UsingMaps() throws SQLException {
         Map<String,Float> duckPricesFromUI = new MainPage()
                 .openRubberDucksPage()
                 .getDuckPricesToMap();
