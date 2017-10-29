@@ -4,23 +4,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class RubberDucksPage extends AbstractPage{
 
     @FindBy(className = "name")
-    List<WebElement> duckNames;
+    private List<WebElement> duckNames;
 
     @FindBy(className = "price-wrapper")
-    List<WebElement> duckPrices;
+    private List<WebElement> duckPrices;
 
 //    public RubberDucksPage() {
 //        driver.get("http://localhost/litecart/en/rubber-ducks-c-1/");
 //    }
 
     public List<String> getDuckNames() {
-        List<String> duckNamesResult = new ArrayList<String>();
+        List<String> duckNamesResult = new ArrayList<>();
         for(WebElement currentDuckName: duckNames) {
             duckNamesResult.add(currentDuckName.getText());
         }
@@ -38,5 +37,17 @@ public class RubberDucksPage extends AbstractPage{
                     currentDuckPrice.findElement(By.xpath("*[1]")).getText().substring(1)));
         }
         return duckPricesResult;
+    }
+
+    public Map<String,Float> getDuckPricesToMap() {
+        Map<String,Float> duckPricesResultToMap = new TreeMap<>();
+        for(WebElement currentDuckName: duckNames) {
+            duckPricesResultToMap.put(
+                    currentDuckName.getText(),
+                    Float.valueOf(currentDuckName
+                            .findElement(By.xpath("//div[@class='price-wrapper']"))
+                            .findElement(By.xpath("*[1]")).getText().substring(1)));
+        }
+        return duckPricesResultToMap;
     }
 }

@@ -9,8 +9,10 @@ import utils.PropertyHelper;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
-import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertEquals;
+
 
 public class LitecartDatabaseTests {
 
@@ -61,6 +63,16 @@ public class LitecartDatabaseTests {
 
         Collections.sort(duckPricesFromDB);
         Collections.sort(duckPricesFromUI);
+
+        assertEquals(duckPricesFromDB, duckPricesFromUI);
+    }
+   @Test
+    public void duckPricesInUIShouldBeEqualToDB2() throws SQLException {
+        Map<String,Float> duckPricesFromUI = new MainPage()
+                .openRubberDucksPage()
+                .getDuckPricesToMap();
+
+        Map<String,Float> duckPricesFromDB = DBHelper.getProductPricesToMap();
 
         assertEquals(duckPricesFromDB, duckPricesFromUI);
     }

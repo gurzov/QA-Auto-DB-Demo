@@ -6,8 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class DBHelper {
 
@@ -45,6 +44,19 @@ public class DBHelper {
 
         while (rs.next()) {
             response.add(rs.getFloat("USD"));
+        }
+        return response;
+    }
+    public static Map<String,Float> getProductPricesToMap() throws SQLException {
+        String query = "SELECT product.name, price.USD \n" +
+                "FROM `lc_products_info` product\n" +
+                "JOIN `lc_products_prices` price \n" +
+                "WHERE price.product_id = product.product_id";
+        ResultSet rs = executeQuery(query);
+        Map<String,Float> response = new TreeMap<>();
+
+        while (rs.next()) {
+            response.put(rs.getString("name"),rs.getFloat("USD"));
         }
         return response;
     }
