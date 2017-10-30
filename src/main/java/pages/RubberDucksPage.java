@@ -14,6 +14,9 @@ public class RubberDucksPage extends AbstractPage{
     @FindBy(className = "price-wrapper")
     private List<WebElement> duckPrices;
 
+    @FindBy(className = "campaign-price")
+    private List<WebElement> campaignPrices;
+
 //    public RubberDucksPage() {
 //        driver.get("http://localhost/litecart/en/rubber-ducks-c-1/");
 //    }
@@ -49,5 +52,17 @@ public class RubberDucksPage extends AbstractPage{
                             .findElement(By.xpath("*[1]")).getText().substring(1)));
         }
         return duckPricesResultToMap;
+    }
+
+    public Map<String,Float> getCampaignPriceToMap() {
+        ////*[@class='campaign-price']/parent::div/preceding-sibling::div[@class='name']
+        Map<String,Float> campaignPricesResultToMap = new TreeMap<>();
+        for(WebElement currentDuckPrice: campaignPrices) {
+            campaignPricesResultToMap.put(
+                    currentDuckPrice.findElement(By.xpath("../preceding-sibling::div[@class='name']")).getText(),
+                    Float.valueOf(currentDuckPrice.getText().substring(1)));
+        }
+        return campaignPricesResultToMap;
+
     }
 }

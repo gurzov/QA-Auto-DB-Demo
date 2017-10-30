@@ -61,6 +61,20 @@ public class DBHelper {
         return response;
     }
 
+    public static Map<String,Float> getCampaignProductPriceToMap() throws SQLException {
+        String query = "SELECT product.name, price.USD \n" +
+                "FROM `lc_products_info` product\n" +
+                "JOIN `lc_products_campaigns` price \n" +
+                "WHERE price.product_id = product.product_id";
+        ResultSet rs = executeQuery(query);
+        Map<String,Float> response = new TreeMap<>();
+
+        while (rs.next()) {
+            response.put(rs.getString("name"),rs.getFloat("USD"));
+        }
+        return response;
+    }
+
     private static ResultSet executeQuery(String query) {
         Connection connection = getDatabaseConnection();
         ResultSet response = null;

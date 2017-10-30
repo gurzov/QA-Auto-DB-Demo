@@ -76,4 +76,15 @@ public class LitecartDatabaseTests {
         assertEquals(duckPricesFromDB, duckPricesFromUI);
     }
 
+    @Test
+    public void campaignPriceInUIShouldBeEqualToDB_UsingMaps() throws SQLException {
+        Map<String,Float> campaignPriceFromUI = new MainPage()
+                .openRubberDucksPage()
+                .getCampaignPriceToMap();
+
+        Map<String,Float> campaignPriceFromDB = DBHelper.getCampaignProductPriceToMap();
+
+        assertEquals(campaignPriceFromDB, campaignPriceFromUI);
+    }
+
 }
